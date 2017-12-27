@@ -14,8 +14,7 @@
     End Sub
 
     Public Sub New(ApiKey As String, ApiSecret As String)
-        API_KEY = ApiKey
-        API_SECRET_BYTES = Convert.FromBase64String(ApiSecret)
+        MyClass.New(ApiKey, Convert.FromBase64String(ApiSecret))
     End Sub
     Public Sub New(ApiKey As String, ApiSecret() As Byte)
         API_KEY = ApiKey

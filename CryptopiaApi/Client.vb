@@ -34,10 +34,13 @@ Public Class Client
         Me.API_SECRET_BYTES = _DefaultKeys.API_SECRET_BYTES
     End Sub
 
-    Public Sub New(APIKey As String, APISecret As String)
-        Me.API_KEY = APIKey
-        Me.API_SECRET_BYTES = Convert.FromBase64String(APISecret)
+    Public Sub New(keys As ApiKeys)
+        MyClass.New(keys.API_KEY, keys.API_SECRET_BYTES)
     End Sub
+    Public Sub New(APIKey As String, APISecret As String)
+        MyClass.New(APIKey, Convert.FromBase64String(APISecret))
+    End Sub
+
     Public Sub New(APIKey As String, APISecret() As Byte)
         Me.API_KEY = APIKey
         Me.API_SECRET_BYTES = APISecret
