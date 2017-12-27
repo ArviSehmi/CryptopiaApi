@@ -49,32 +49,32 @@ Public Class Client
 
 
 
-    Public Async Function CallFunction(Of ResultType, ParameterType)(functionName As String, parameters As ParameterType) As Task(Of ResultType)
+
+    Public Async Function CallFunction(Of ResultType)(functionName As String, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
+        Return Await CallFunction(Of ResultType, Object)(functionName, Nothing, needsAuthorisation)
+    End Function
+
+    Public Async Function CallFunction(Of ResultType, ParameterType)(functionName As String, parameters As ParameterType, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
 
         Dim URL As String = $"{BASE_URL}{functionName}"
 
-        Dim post_json = JsonConvert.SerializeObject(parameters)
-        Dim post_data = UTF8Encoding.UTF8.GetBytes(post_json)
-
-        Dim nonce = Convert.ToUInt64(Now.Ticks)
-
         Dim http_req = HttpWebRequest.Create(URL)
-        http_req.Method = "POST"
-        http_req.ContentType = "application/json"
-        http_req.ContentLength = post_data.Length
+        http_req.Method = "GET"
 
-        Using md = MD5.Create(), hm = New HMACSHA256(API_SECRET_BYTES)
-            Dim md5Hash = Convert.ToBase64String(md.ComputeHash(post_data))
-            Dim signature = $"{API_KEY}POST{HttpUtility.UrlEncode(URL).ToLower()}{nonce}{md5Hash}"
-            Dim hmac = Convert.ToBase64String(hm.ComputeHash(UTF8Encoding.UTF8.GetBytes(signature)))
-            Dim auth = $"amx {API_KEY}:{hmac}:{nonce}"
-            http_req.Headers.Add("Authorization", auth)
-        End Using
+        If needsAuthorisation Then
 
+            http_req.Method = "POST"
+            Dim post_json = JsonConvert.SerializeObject(parameters)
+            Dim post_data = UTF8Encoding.UTF8.GetBytes(post_json)
+            http_req.ContentType = "application/json"
+            http_req.ContentLength = post_data.Length
+            http_req.Headers.Add("Authorization", getAuthorisation(URL, post_data))
 
-        Using http_req_stream = Await http_req.GetRequestStreamAsync()
-            Await http_req_stream.WriteAsync(post_data, 0, post_data.Length)
-        End Using
+            Using http_req_stream = Await http_req.GetRequestStreamAsync()
+                Await http_req_stream.WriteAsync(post_data, 0, post_data.Length)
+            End Using
+
+        End If
 
         Using http_resp = Await http_req.GetResponseAsync()
 
@@ -88,6 +88,17 @@ Public Class Client
         End Using
 
 
+    End Function
+
+    Private Function getAuthorisation(URL As String, post_data As Byte()) As String
+        'AMX scheme authorisation header
+        Using md = MD5.Create(), hm = New HMACSHA256(API_SECRET_BYTES)
+            Dim nonce = Convert.ToUInt64(Now.Ticks)
+            Dim md5Hash = Convert.ToBase64String(md.ComputeHash(post_data))
+            Dim signature = $"{API_KEY}POST{HttpUtility.UrlEncode(URL).ToLower()}{nonce}{md5Hash}"
+            Dim hmac = Convert.ToBase64String(hm.ComputeHash(UTF8Encoding.UTF8.GetBytes(signature)))
+            Return $"amx {API_KEY}:{hmac}:{nonce}"
+        End Using
     End Function
 
 
