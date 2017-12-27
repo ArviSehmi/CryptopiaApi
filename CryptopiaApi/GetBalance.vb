@@ -21,7 +21,7 @@
     End Class
 
 
-    Public Shared Function Execute(params As Parameters) As Task(Of Result())
+    Public Shared Function [Call](params As Parameters) As Task(Of Result())
         Return Client.Default.CallFunction(Of Result(), Parameters)("GetBalance", params)
     End Function
 
