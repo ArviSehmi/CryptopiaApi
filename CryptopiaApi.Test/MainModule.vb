@@ -2,14 +2,34 @@
 
     Sub Main()
 
-        CryptopiaApi.Client.DefaultApiKey = ""
-        CryptopiaApi.Client.DefaultApiSecret = ""
+        'CryptopiaApi.ApiKeys.DeleteDefaults()
+
+        LoadOrRequestApiKeys()
 
         'Test_GetBalance()
         Test_GetCurrencies()
 
         Console.WriteLine("Press any key to exit...")
         Console.ReadKey()
+    End Sub
+
+    Public Sub LoadOrRequestApiKeys()
+
+        Dim defaultKeys = CryptopiaApi.ApiKeys.LoadDefaults()
+
+        If defaultKeys Is Nothing Then
+            Console.WriteLine("Please enter your API Key...")
+            Dim apiKey = Console.ReadLine().Trim()
+
+            Console.WriteLine("Please enter your API SECRET Key...")
+            Dim apiSecret = Console.ReadLine().Trim()
+
+            defaultKeys = New ApiKeys(apiKey, apiSecret)
+            defaultKeys.StoreAsDefaults()
+        End If
+
+        CryptopiaApi.Client.DefaultKeys = defaultKeys
+
     End Sub
 
 
