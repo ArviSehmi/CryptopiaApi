@@ -6,47 +6,42 @@ Imports System.Net
 Public Class Client
 
     Private Shared ReadOnly BASE_URL As String = "https://www.cryptopia.co.nz/Api/"
-    Private Shared _DefaultApiKey As String
-    Private Shared _DefaultApiKeySecret As String
+
+    Private Shared _DefaultKeys As ApiKeys
     Private Shared _DefaultClient As Client
 
-    Public Shared WriteOnly Property DefaultApiKey As String
-        Set(value As String)
-            _DefaultApiKey = value
-            _DefaultClient = Nothing
-        End Set
-    End Property
-    Public Shared WriteOnly Property DefaultApiSecret As String
-        Set(value As String)
-            _DefaultApiKeySecret = value
+    Public Shared WriteOnly Property DefaultKeys As ApiKeys
+        Set(value As ApiKeys)
+            _DefaultKeys = value
             _DefaultClient = Nothing
         End Set
     End Property
 
     Public Shared ReadOnly Property [Default] As Client
         Get
-            If _DefaultClient Is Nothing Then
-                _DefaultClient = New Client
-            End If
+            If _DefaultClient Is Nothing Then _DefaultClient = New Client
             Return _DefaultClient
         End Get
     End Property
 
 
     Private ReadOnly API_KEY As String
-    Private ReadOnly API_SECRET As String
     Private ReadOnly API_SECRET_BYTES As Byte()
 
     Public Sub New()
-        MyClass.New(_DefaultApiKey, _DefaultApiKeySecret)
+        If _DefaultKeys Is Nothing Then Throw New Exception("No default API keys have been specified")
+        Me.API_KEY = _DefaultKeys.API_KEY
+        Me.API_SECRET_BYTES = _DefaultKeys.API_SECRET_BYTES
     End Sub
 
     Public Sub New(APIKey As String, APISecret As String)
         Me.API_KEY = APIKey
-        Me.API_SECRET = APISecret
-        Me.API_SECRET_BYTES = Convert.FromBase64String(Me.API_SECRET)
+        Me.API_SECRET_BYTES = Convert.FromBase64String(APISecret)
     End Sub
-
+    Public Sub New(APIKey As String, APISecret() As Byte)
+        Me.API_KEY = APIKey
+        Me.API_SECRET_BYTES = APISecret
+    End Sub
 
 
 
