@@ -2,10 +2,11 @@
 
     Sub Main()
 
-        CryptopiaApi.Client.DefaultApiKey = "API KEY"
-        CryptopiaApi.Client.DefaultApiSecret = "API SECRET"
+        CryptopiaApi.Client.DefaultApiKey = ""
+        CryptopiaApi.Client.DefaultApiSecret = ""
 
-        Test_GetBalance()
+        'Test_GetBalance()
+        Test_GetCurrencies()
 
         Console.WriteLine("Press any key to exit...")
         Console.ReadKey()
@@ -17,7 +18,7 @@
 
         Dim parameters = New GetBalance.Parameters() With {.Currency = ""} 'blank = all
 
-        Dim balances = GetBalance.Execute(parameters).Result
+        Dim balances = GetBalance.Call(parameters).Result
 
         For Each r In balances
             Console.WriteLine(r.Symbol & " = " & r.Available)
@@ -25,4 +26,14 @@
 
     End Sub
 
+
+    Public Sub Test_GetCurrencies()
+
+        Dim currs = GetCurrencies.Call().Result
+
+        For Each r In currs
+            Console.WriteLine(r.Symbol & " = " & r.Status)
+        Next
+
+    End Sub
 End Module
