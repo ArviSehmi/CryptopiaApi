@@ -14,8 +14,8 @@ Public MustInherit Class ApiEndpoint
     End Sub
 
 
-    Public Async Function CallFunction(Of ResultType)(functionName As String, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
-        Return Await CallFunction(Of ResultType, Object)(functionName, Nothing, needsAuthorisation)
+    Public Function CallFunction(Of ResultType)(functionName As String, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
+        Return CallFunction(Of ResultType, Object)(functionName, Nothing, needsAuthorisation)
     End Function
 
     Public Async Function CallFunction(Of ResultType, ParameterType)(functionName As String, parameters As ParameterType, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
