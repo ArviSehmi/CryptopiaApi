@@ -6,16 +6,37 @@
         Me._Keys = Keys
     End Sub
 
+#Region "PUBLIC CALLS (keys not required)"
+
+    Public Function GetCurrencies() As Task(Of GetCurrencies.Result())
+        Static ep As New GetCurrencies(_Keys)
+        Return ep.Call()
+    End Function
+
+    Public Function GetTradePairs() As Task(Of GetTradePairs.Result())
+        Static ep As New GetTradePairs(_Keys)
+        Return ep.Call()
+    End Function
+
+    Public Function GetMarket(p As GetMarket.Parameters) As Task(Of GetMarket.Result)
+        Static ep As New GetMarket(_Keys)
+        Return ep.Call(p)
+    End Function
+
+    Public Function GetMarkets(Optional p As GetMarkets.Parameters = Nothing) As Task(Of GetMarket.Result())
+        Static ep As New GetMarkets(_Keys)
+        Return ep.Call(p)
+    End Function
+
+#End Region
+
+
 
     Public Function GetBalance(p As GetBalance.Parameters) As Task(Of GetBalance.Result())
         Static ep As New GetBalance(_Keys)
         Return ep.Call(p)
     End Function
 
-    Public Function GetCurrencies() As Task(Of GetCurrencies.Result())
-        Static ep As New GetCurrencies(_Keys)
-        Return ep.Call()
-    End Function
 
     Public Function GetDepositAddress(p As GetDepositAddress.Parameters) As Task(Of GetDepositAddress.Result)
         Static ep As New GetDepositAddress(_Keys)

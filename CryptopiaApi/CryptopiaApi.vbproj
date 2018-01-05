@@ -75,8 +75,11 @@
     <Compile Include="GetBalance.vb" />
     <Compile Include="GetCurrencies.vb" />
     <Compile Include="GetDepositAddress.vb" />
+    <Compile Include="GetMarket.vb" />
+    <Compile Include="GetMarkets.vb" />
     <Compile Include="GetOpenOrders.vb" />
     <Compile Include="GetTradeHistory.vb" />
+    <Compile Include="GetTradePairs.vb" />
     <Compile Include="GetTransactions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
