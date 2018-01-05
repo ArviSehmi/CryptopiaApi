@@ -32,5 +32,10 @@
         Return ep.Call(p)
     End Function
 
+    Public Function GetTransactions(p As GetTransactions.Parameters) As Task(Of GetTransactions.Result())
+        Static ep As New GetTransactions(_Keys)
+        Return ep.Call(p)
+    End Function
+
 
 End Class

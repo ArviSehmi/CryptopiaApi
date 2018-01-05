@@ -76,6 +76,7 @@
     <Compile Include="GetDepositAddress.vb" />
     <Compile Include="GetOpenOrders.vb" />
     <Compile Include="GetTradeHistory.vb" />
+    <Compile Include="GetTransactions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
