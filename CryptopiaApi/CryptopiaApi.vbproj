@@ -76,6 +76,9 @@
     <Compile Include="GetCurrencies.vb" />
     <Compile Include="GetDepositAddress.vb" />
     <Compile Include="GetMarket.vb" />
+    <Compile Include="GetMarketHistory.vb" />
+    <Compile Include="GetMarketOrderGroups.vb" />
+    <Compile Include="GetMarketOrders.vb" />
     <Compile Include="GetMarkets.vb" />
     <Compile Include="GetOpenOrders.vb" />
     <Compile Include="GetTradeHistory.vb" />

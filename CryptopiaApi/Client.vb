@@ -28,6 +28,21 @@
         Return ep.Call(p)
     End Function
 
+    Public Function GetMarketHistory(Optional p As GetMarketHistory.Parameters = Nothing) As Task(Of GetMarketHistory.Result())
+        Static ep As New GetMarketHistory(_Keys)
+        Return ep.Call(p)
+    End Function
+
+    Public Function GetMarketOrders(Optional p As GetMarketOrders.Parameters = Nothing) As Task(Of GetMarketOrders.Result)
+        Static ep As New GetMarketOrders(_Keys)
+        Return ep.Call(p)
+    End Function
+
+
+    Public Function GetMarketOrderGroups(Optional p As GetMarketOrderGroups.Parameters = Nothing) As Task(Of GetMarketOrderGroups.Result())
+        Static ep As New GetMarketOrderGroups(_Keys)
+        Return ep.Call(p)
+    End Function
 #End Region
 
 
