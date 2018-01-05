@@ -7,7 +7,9 @@
 
 
     Public Class Parameters
+        ''' <summary>The currency symbol of the address to return e.g. 'DOT' (not required if 'CurrencyId' supplied)</summary>
         Property Currency As String
+        ''' <summary>The Cryptopia currency identifier of the address to return e.g. '2' (not required if 'Currency' supplied)</summary>
         Property CurrencyId As Integer?
     End Class
 
