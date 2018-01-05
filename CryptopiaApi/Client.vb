@@ -27,4 +27,10 @@
         Return ep.Call(p)
     End Function
 
+    Public Function GetTradeHistory(p As GetTradeHistory.Parameters) As Task(Of GetTradeHistory.Result())
+        Static ep As New GetTradeHistory(_Keys)
+        Return ep.Call(p)
+    End Function
+
+
 End Class
