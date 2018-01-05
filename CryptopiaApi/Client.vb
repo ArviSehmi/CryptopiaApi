@@ -7,17 +7,15 @@
     End Sub
 
 
-    Public ReadOnly Property GetBalance As GetBalance
-        Get
-            Static ep As New GetBalance(_Keys)
-            Return ep
-        End Get
-    End Property
-    Public ReadOnly Property GetCurrencies As GetCurrencies
-        Get
-            Static ep As New GetCurrencies(_Keys)
-            Return ep
-        End Get
-    End Property
+    Public Function GetBalance(p As GetBalance.Parameters) As Task(Of GetBalance.Result())
+        Static ep As New GetBalance(_Keys)
+        Return ep.Call(p)
+    End Function
+
+    Public Function GetCurrencies() As Task(Of GetCurrencies.Result())
+        Static ep As New GetCurrencies(_Keys)
+        Return ep.Call()
+    End Function
+
 
 End Class
