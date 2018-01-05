@@ -7,21 +7,12 @@
 
 
     Public Class Parameters
-        ''' <summary>
-        ''' The market symbol Of the orders To Return e.g. 'DOT/BTC' (not required if 'TradePairId' supplied)
-        ''' </summary>
-        ''' <returns></returns>
+        ''' <summary>The market symbol Of the orders To Return e.g. 'DOT/BTC' (not required if 'TradePairId' supplied)</summary>
         Property Market As String
-        ''' <summary>
-        ''' The Cryptopia tradepair identifier Of the orders To Return e.g. '100' (not required if 'Market' supplied)
-        ''' </summary>
-        ''' <returns></returns>
+        ''' <summary>The Cryptopia tradepair identifier Of the orders To Return e.g. '100' (not required if 'Market' supplied)</summary>
         Property TradePairId As Integer?
 
-        ''' <summary>
-        ''' (optional) The maximum amount of orders to return e.g. '10' (default: 100)
-        ''' </summary>
-        ''' <returns></returns>
+        ''' <summary>(optional) The maximum amount of orders to return e.g. '10' (default: 100)</summary>
         Property Count As Integer?
 
     End Class
