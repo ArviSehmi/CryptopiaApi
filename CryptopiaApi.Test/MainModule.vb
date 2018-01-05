@@ -21,6 +21,24 @@
 
         Dim defaultKeys = CryptopiaApi.ApiKeys.LoadDefaults()
 
+        If defaultKeys IsNot Nothing Then
+            Console.WriteLine($"Continue with key {defaultKeys.API_KEY}...?")
+            Console.WriteLine("Y=Yes    N=Change    D=Delete stored keys")
+
+            Select Case Char.ToUpper(Console.ReadKey().KeyChar)
+                Case "Y"
+                Case "N"
+                    defaultKeys = Nothing
+                Case "D"
+                    defaultKeys = Nothing
+                    CryptopiaApi.ApiKeys.DeleteDefaults()
+                    Console.WriteLine("Stored keys deleted.")
+                Case Else
+                    End
+            End Select
+        End If
+
+
         If defaultKeys Is Nothing Then
             Console.WriteLine("Please enter your API Key...")
             Dim apiKey = Console.ReadLine().Trim()
@@ -29,7 +47,18 @@
             Dim apiSecret = Console.ReadLine().Trim()
 
             defaultKeys = New ApiKeys(apiKey, apiSecret)
-            defaultKeys.StoreAsDefaults()
+
+            Console.WriteLine("Store these keys...?")
+            Console.WriteLine("Y=Yes    N=No    Any other key to exit.")
+
+            Select Case Char.ToUpper(Console.ReadKey().KeyChar)
+                Case "Y"
+                    defaultKeys.StoreAsDefaults()
+                Case "N"
+                Case Else
+                    End
+            End Select
+
         End If
 
         _Client = New Client(defaultKeys)
