@@ -1,6 +1,10 @@
 ﻿Module MainModule
 
+
+    Private _Client As Client
+
     Sub Main()
+
 
         'CryptopiaApi.ApiKeys.DeleteDefaults()
 
@@ -28,7 +32,7 @@
             defaultKeys.StoreAsDefaults()
         End If
 
-        CryptopiaApi.Client.DefaultKeys = defaultKeys
+        _Client = New Client(defaultKeys)
 
     End Sub
 
@@ -38,7 +42,9 @@
 
         Dim parameters = New GetBalance.Parameters() With {.Currency = ""} 'blank = all
 
-        Dim balances = GetBalance.Call(parameters).Result
+
+
+        Dim balances = _Client.GetBalance(parameters).Result
 
         For Each r In balances
             Console.WriteLine(r.Symbol & " = " & r.Available)
@@ -49,7 +55,7 @@
 
     Public Sub Test_GetCurrencies()
 
-        Dim currs = GetCurrencies.Call().Result
+        Dim currs = _Client.GetCurrencies().Result
 
         For Each r In currs
             Console.WriteLine(r.Symbol & " = " & r.Status)
