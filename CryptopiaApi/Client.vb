@@ -17,5 +17,10 @@
         Return ep.Call()
     End Function
 
+    Public Function GetDepositAddress(p As GetDepositAddress.Parameters) As Task(Of GetDepositAddress.Result)
+        Static ep As New GetDepositAddress(_Keys)
+        Return ep.Call(p)
+    End Function
+
 
 End Class
