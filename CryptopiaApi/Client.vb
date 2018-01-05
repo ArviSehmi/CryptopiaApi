@@ -43,5 +43,19 @@
         Return ep.Call(p)
     End Function
 
+    Public Function CancelTrade(p As CancelTrade.Parameters) As Task(Of CancelTrade.Result)
+        Static ep As New CancelTrade(_Keys)
+        Return ep.Call(p)
+    End Function
+
+    Public Function SubmitTip(p As SubmitTip.Parameters) As Task(Of String)
+        Static ep As New SubmitTip(_Keys)
+        Return ep.Call(p)
+    End Function
+
+    Public Function SubmitWithdraw(p As SubmitWithdraw.Parameters) As Task(Of Integer)
+        Static ep As New SubmitWithdraw(_Keys)
+        Return ep.Call(p)
+    End Function
 
 End Class
