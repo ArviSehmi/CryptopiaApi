@@ -58,4 +58,8 @@
         Return ep.Call(p)
     End Function
 
+    Public Function SubmitTransfer(p As SubmitTransfer.Parameters) As Task(Of String)
+        Static ep As New SubmitTransfer(_Keys)
+        Return ep.Call(p)
+    End Function
 End Class

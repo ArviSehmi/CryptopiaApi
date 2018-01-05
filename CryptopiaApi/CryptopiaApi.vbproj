@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="SubmitTip.vb" />
     <Compile Include="SubmitTrade.vb" />
+    <Compile Include="SubmitTransfer.vb" />
     <Compile Include="SubmitWithdraw.vb" />
   </ItemGroup>
   <ItemGroup>
