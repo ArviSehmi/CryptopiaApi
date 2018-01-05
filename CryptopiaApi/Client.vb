@@ -19,33 +19,18 @@ Public Class Client
 
     Public Shared ReadOnly Property [Default] As Client
         Get
-            If _DefaultClient Is Nothing Then _DefaultClient = New Client
+            If _DefaultClient Is Nothing Then _DefaultClient = New Client(_DefaultKeys)
             Return _DefaultClient
         End Get
     End Property
 
 
-    Private ReadOnly API_KEY As String
-    Private ReadOnly API_SECRET_BYTES As Byte()
+    Private ReadOnly _Keys As ApiKeys
 
-    Public Sub New()
-        If _DefaultKeys Is Nothing Then Throw New Exception("No default API keys have been specified")
-        Me.API_KEY = _DefaultKeys.API_KEY
-        Me.API_SECRET_BYTES = _DefaultKeys.API_SECRET_BYTES
-    End Sub
 
-    Public Sub New(keys As ApiKeys)
-        MyClass.New(keys.API_KEY, keys.API_SECRET_BYTES)
+    Public Sub New(Keys As ApiKeys)
+        Me._Keys = Keys
     End Sub
-    Public Sub New(APIKey As String, APISecret As String)
-        MyClass.New(APIKey, Convert.FromBase64String(APISecret))
-    End Sub
-
-    Public Sub New(APIKey As String, APISecret() As Byte)
-        Me.API_KEY = APIKey
-        Me.API_SECRET_BYTES = APISecret
-    End Sub
-
 
 
     Public Async Function CallFunction(Of ResultType)(functionName As String, Optional needsAuthorisation As Boolean = True) As Task(Of ResultType)
@@ -90,12 +75,12 @@ Public Class Client
 
     Private Function getAuthorisation(URL As String, post_data As Byte()) As String
         'AMX scheme authorisation header
-        Using md = MD5.Create(), hm = New HMACSHA256(API_SECRET_BYTES)
+        Using md = MD5.Create(), hm = New HMACSHA256(Me._Keys.API_SECRET_BYTES)
             Dim nonce = Convert.ToUInt64(Now.Ticks)
             Dim md5Hash = Convert.ToBase64String(md.ComputeHash(post_data))
-            Dim signature = $"{API_KEY}POST{HttpUtility.UrlEncode(URL).ToLower()}{nonce}{md5Hash}"
+            Dim signature = $"{Me._Keys.API_KEY}POST{HttpUtility.UrlEncode(URL).ToLower()}{nonce}{md5Hash}"
             Dim hmac = Convert.ToBase64String(hm.ComputeHash(UTF8Encoding.UTF8.GetBytes(signature)))
-            Return $"amx {API_KEY}:{hmac}:{nonce}"
+            Return $"amx {Me._Keys.API_KEY}:{hmac}:{nonce}"
         End Using
     End Function
 
