@@ -1,5 +1,9 @@
 ﻿Public Class GetCurrencies
+    Inherits ApiEndpoint
 
+    Public Sub New(apiKeys As ApiKeys)
+        MyBase.New(apiKeys)
+    End Sub
     Public Class Result
         Public Property Id As Integer
         Public property Name As String
@@ -16,8 +20,8 @@
         Public Property ListingStatus As String
     End Class
 
-    Public Shared Function [Call]() As Task(Of Result())
-        Return Client.Default.CallFunction(Of Result())("GetCurrencies", needsAuthorisation:=False)
+    Public Function [Call]() As Task(Of Result())
+        Return Me.CallFunction(Of Result())("GetCurrencies", needsAuthorisation:=False)
     End Function
 
 End Class

@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiKeys.vb" />
+    <Compile Include="ApiEndpoint.vb" />
     <Compile Include="Client.vb" />
     <Compile Include="GetBalance.vb" />
     <Compile Include="GetCurrencies.vb" />

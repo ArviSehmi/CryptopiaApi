@@ -1,4 +1,10 @@
 ﻿Public Class GetBalance
+    Inherits ApiEndpoint
+
+    Public Sub New(apiKeys As ApiKeys)
+        MyBase.New(apiKeys)
+    End Sub
+
 
     Public Class Parameters
         Property Currency As String
@@ -21,8 +27,8 @@
     End Class
 
 
-    Public Shared Function [Call](params As Parameters) As Task(Of Result())
-        Return Client.Default.CallFunction(Of Result(), Parameters)("GetBalance", params)
+    Public Function [Call](params As Parameters) As Task(Of Result())
+        Return CallFunction(Of Result(), Parameters)("GetBalance", params)
     End Function
 
 End Class
