@@ -38,4 +38,10 @@
     End Function
 
 
+    Public Function SubmitTrade(p As SubmitTrade.Parameters) As Task(Of SubmitTrade.Result())
+        Static ep As New SubmitTrade(_Keys)
+        Return ep.Call(p)
+    End Function
+
+
 End Class
