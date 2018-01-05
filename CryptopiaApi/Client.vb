@@ -22,5 +22,9 @@
         Return ep.Call(p)
     End Function
 
+    Public Function GetOpenOrders(p As GetOpenOrders.Parameters) As Task(Of GetOpenOrders.Result())
+        Static ep As New GetOpenOrders(_Keys)
+        Return ep.Call(p)
+    End Function
 
 End Class
