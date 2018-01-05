@@ -1,4 +1,5 @@
-﻿Public Class GetCurrencies
+﻿
+Public Class GetCurrencies
     Inherits ApiEndpoint
 
     Public Sub New(apiKeys As ApiKeys)
@@ -6,17 +7,17 @@
     End Sub
     Public Class Result
         Public Property Id As Integer
-        Public property Name As String
+        Public Property Name As String
         Public Property Symbol As String
-        Public property Algorithm As String
+        Public Property Algorithm As String
         Public Property WithdrawFee As Decimal
-        Public property MinWithdraw As Decimal
+        Public Property MinWithdraw As Decimal
         Public Property MinBaseTrade As Decimal
-        Public property IsTipEnabled As Boolean
+        Public Property IsTipEnabled As Boolean
         Public Property MinTip As Decimal
-        Public property DepositConfirmations As Integer
+        Public Property DepositConfirmations As Integer
         Public Property Status As String
-        Public property StatusMessage As String
+        Public Property StatusMessage As String
         Public Property ListingStatus As String
     End Class
 

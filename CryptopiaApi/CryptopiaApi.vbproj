@@ -70,20 +70,20 @@
   <ItemGroup>
     <Compile Include="ApiKeys.vb" />
     <Compile Include="ApiEndpoint.vb" />
-    <Compile Include="CancelTrade.vb" />
+    <Compile Include="Private Endpoints\CancelTrade.vb" />
     <Compile Include="Client.vb" />
-    <Compile Include="GetBalance.vb" />
-    <Compile Include="GetCurrencies.vb" />
-    <Compile Include="GetDepositAddress.vb" />
-    <Compile Include="GetMarket.vb" />
-    <Compile Include="GetMarketHistory.vb" />
-    <Compile Include="GetMarketOrderGroups.vb" />
-    <Compile Include="GetMarketOrders.vb" />
-    <Compile Include="GetMarkets.vb" />
-    <Compile Include="GetOpenOrders.vb" />
-    <Compile Include="GetTradeHistory.vb" />
-    <Compile Include="GetTradePairs.vb" />
-    <Compile Include="GetTransactions.vb" />
+    <Compile Include="Private Endpoints\GetBalance.vb" />
+    <Compile Include="Public Endpoints\GetCurrencies.vb" />
+    <Compile Include="Private Endpoints\GetDepositAddress.vb" />
+    <Compile Include="Public Endpoints\GetMarket.vb" />
+    <Compile Include="Public Endpoints\GetMarketHistory.vb" />
+    <Compile Include="Public Endpoints\GetMarketOrderGroups.vb" />
+    <Compile Include="Public Endpoints\GetMarketOrders.vb" />
+    <Compile Include="Public Endpoints\GetMarkets.vb" />
+    <Compile Include="Private Endpoints\GetOpenOrders.vb" />
+    <Compile Include="Private Endpoints\GetTradeHistory.vb" />
+    <Compile Include="Public Endpoints\GetTradePairs.vb" />
+    <Compile Include="Private Endpoints\GetTransactions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -99,10 +99,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SubmitTip.vb" />
-    <Compile Include="SubmitTrade.vb" />
-    <Compile Include="SubmitTransfer.vb" />
-    <Compile Include="SubmitWithdraw.vb" />
+    <Compile Include="Private Endpoints\SubmitTip.vb" />
+    <Compile Include="Private Endpoints\SubmitTrade.vb" />
+    <Compile Include="Private Endpoints\SubmitTransfer.vb" />
+    <Compile Include="Private Endpoints\SubmitWithdraw.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
